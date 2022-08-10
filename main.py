@@ -28,8 +28,10 @@ for index, name in enumerate(planet_name):
     gravity = (float(planet_mass[index])*1.989e+30) / (float(planet_radius[index])*float(planet_radius[index])*6.957e+8*6.957e+8) * 6.674e-11
     planet_gravity.append(gravity)
 
-# Checking Planet Gravity Below
-print(planet_gravity)
+# Sorting All The Lists
+planet_mass.sort()
+planet_radius.sort()
+planet_gravity.sort()
 
 # Plotting A Bar Graph With Planet Names And Their Gravity
 fig = px.scatter(x=planet_name, y=planet_gravity)
@@ -37,5 +39,34 @@ fig.layout.update({
     "title": "Planets With Their Gravity",
     "xaxis": {"title": "Planet Names"},
     "yaxis": {"title": "Planet Gravity"},
+})
+fig.show()
+
+# Creating Charts
+# Charts Of Mass And Radius Of The Planets With Respect To Gravity
+fig = px.scatter(x=planet_mass, y=planet_radius, color=planet_gravity, hover_name=planet_name)
+fig.layout.update(
+    coloraxis_colorbar=dict(
+        title="Gravity",
+    )
+)
+fig.layout.update({
+    "title": "Mass And Radius Of The Planets With Respect To Gravity",
+    "xaxis": {"title": "Mass"},
+    "yaxis": {"title": "Radius"},
+})
+fig.show()
+
+# Charts Of Mass And Gravity Of The Planets With Respect To Radius
+fig = px.scatter(x=planet_mass, y=planet_gravity, color=planet_radius, hover_name=planet_name)
+fig.layout.update(
+    coloraxis_colorbar=dict(
+        title="Radius",
+    )
+)
+fig.layout.update({
+    "title": "Mass And Gravity Of The Planets With Respect To Radius",
+    "xaxis": {"title": "Mass"},
+    "yaxis": {"title": "Gravity"},
 })
 fig.show()
